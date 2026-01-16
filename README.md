@@ -80,4 +80,13 @@ Instead of trying to block "bad" characters (blacklisting), this method only per
 e.  Utilize Secure Stored Procedures
 Stored procedures are pre-compiled SQL code stored directly on the database server. When implemented securely with parameters, they have the same protective effect as prepared statements by encapsulating query logic and separating it from user input. <br>
 
+# Challenge 2: Web Server Vulnerabilities
+*In this part, you must find vulnerabilities on an HTTP server. Misconfiguration of a web server can allow for the listing of files contained in directories on the server. You can use any of the tools you learned in earlier labs to perform reconnaissance to find the vulnerable directories.*
+*In this challenge, you will locate the flag file in a vulnerable directory on a web server.*
+
+### Step 1: Preliminary setup ###
+If not already, log into the server at 10.5.5.12 with the admin / password credentials.
+### Step 2: From the results of your reconnaissance, determine which directories are viewable using a web browser and URL manipulation. ###
+Perform reconnaissance on the server to find directories where indexing was found.
+
 
