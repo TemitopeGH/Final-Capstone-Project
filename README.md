@@ -45,4 +45,39 @@ I will be using **crackstation** to crack the hash by visiting **https://crackst
 i will then input the hash i got from Bob smith account which is **5f4dcc3b5aa765d61d8327deb882cf99**. Check the box **I'm not a robot captcha** and click-on **Crack Hashes** <br>
 
 <img width="1366" height="702" alt="smithy hashes password" src="https://github.com/user-attachments/assets/eb325ca4-8a5c-42c3-bf0d-56aa04357a21" />
+The hash result is **password**, type is **md5** <br>
+
+### Step 4: Locate and open the file with Challenge 1 code.
+a. Log into 192.168.0.10 as Bob Smith. <br>
+I will primarily use Secure Shell (SSH) for secure command-line access to access files on **Kali Terminal Emulator** using its IP address (192.168.0.10), username (smithy), and password (password). <br>
+**Command to use** <br>
+ssh smithy@192.168.0.10, type yes, type password <br>
+
+b. Locate and open the flag file in the user's home directory. <br>
+type **ls** to list the files in the directory <br>
+**my_passwords.txt** <br>
+cat **my_passwords.txt** to view the content of the file <br>
+**Congratulations! <br>
+You found the flag for Challenge 1! <br>
+The code for this challenge is 8748wf8J.** <br>
+
+<img width="1366" height="702" alt="Screenshot_2026-01-16_19_17_51" src="https://github.com/user-attachments/assets/41b1eab9-920f-4c49-870f-19c03cc41d41" />
+
+### Step 5: Research and propose SQL attack remediation.
+What are five remediation methods for preventing SQL injection exploits?
+a. Enforce the Principle of Least Privilege 
+Limit the permissions of the database account used by the application. An application should only have access to the specific tables and operations (like SELECT or UPDATE) it needs for its function. It should never use a root or administrative account, which minimizes the damage an attacker can do even if they successfully bypass other defenses. <br>
+
+b. Deploy a Web Application Firewall (WAF)
+A WAF acts as an external shield that monitors and filters incoming HTTP traffic. Modern WAFs use signature-based detection and machine learning to identify and block common SQLi patterns before they even reach the application server. <br>
+
+c.Use Parameterized Queries (Prepared Statements) 
+This is considered the most effective primary defense. Developers use "placeholders" for user input instead of concatenating strings directly into a query. The database receives the query structure first and then binds the input as literal data, preventing it from ever being executed as code. <br>
+
+d. Implement Allow-list Input Validation 
+Instead of trying to block "bad" characters (blacklisting), this method only permits input that matches a strictly defined "good" pattern. For example, if a field requires a user ID, the system should only accept numeric digits and reject everything else, including quotes or semicolons. <br>
+
+e.  Utilize Secure Stored Procedures
+Stored procedures are pre-compiled SQL code stored directly on the database server. When implemented securely with parameters, they have the same protective effect as prepared statements by encapsulating query logic and separating it from user input. <br>
+
 
