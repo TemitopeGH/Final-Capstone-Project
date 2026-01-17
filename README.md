@@ -119,11 +119,11 @@ IIS: Use the IIS Manager to navigate to Directory Browsing and select Disable. <
 # Challenge 3: Exploit open SMB Server Shares
 *In this part, you want to discover if there are any unsecured shared directories located on an SMB server in the 10.5.5.0/24 network. You can use any of the tools you learned in earlier labs to find the drive shares available on the servers.* <br>
 
-### Step 1: Scan for potential targets running SMB. ###
+### Step 1: Scan for potential targets running SMB.
 Use scanning tools to scan the 10.5.5.0/24 LAN for potential targets for SMB enumeration. <br>
 using nmap 10.5.5.0/24 to scan for live hosts **10.5.5.14** in the subnet with open ports 139 and 445 which are associated with SMB services. <br>
-
 <img width="1366" height="702" alt="Screenshot_2026-01-17_12_47_56" src="https://github.com/user-attachments/assets/29d46f48-2284-423b-9bf1-b9bb2281340c" />
+
 Which host on the 10.5.5.0/24 network has open ports indicating it is likely running SMB services? <br>
 Host 10.5.5.14 <br>
 ### Step 2: Determine which SMB directories are shared and can be accessed by anonymous users.
@@ -188,7 +188,8 @@ By looking at the "Source" and "Destination" columns, we can see two primary IP 
 
 - What is the IP address of the target computer? <br>
 10.5.5.11 <br>
-- What directories on the target are revealed in the PCAP?
+- What directories on the target are revealed in the PCAP? <br>
+<img width="1366" height="702" alt="Screenshot_2026-01-17_16_09_02" src="https://github.com/user-attachments/assets/8c340e0f-aefb-4611-b0ca-9d3aaca68c5b" />
 http://10.5.5.11/database-offline.php, http://10.5.5.11/styles/global-styles.css, http://10.5.5.11/test/, http://10.5.5.11/data, http://10.5.5.11/webservices/rest/ws-user-account.php, http://10.5.5.11/includes, http://10.5.5.11/passwords, http://10.5.5.11/icons.text/gif, http://10.5.5.11/javascript/follow-mouse.js, http://10.5.5.11/webservices/soap/lib <br>
 
 ### Step 2: Use a web browser to display the contents of the directories on the target computer.
