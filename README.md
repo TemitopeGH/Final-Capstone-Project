@@ -126,7 +126,7 @@ using nmap 10.5.5.0/24 to scan for live hosts **10.5.5.14** in the subnet with o
 <img width="1366" height="702" alt="Screenshot_2026-01-17_12_47_56" src="https://github.com/user-attachments/assets/29d46f48-2284-423b-9bf1-b9bb2281340c" />
 Which host on the 10.5.5.0/24 network has open ports indicating it is likely running SMB services? <br>
 Host 10.5.5.14 <br>
-### Step 2: Determine which SMB directories are shared and can be accessed by anonymous users.###
+### Step 2: Determine which SMB directories are shared and can be accessed by anonymous users.
 Use a tool to scan the device running SMB and locate the shares that can be accessed by anonymous users using the **enum4linux -S 10.5.5.14** command. <br>
 <img width="1366" height="702" alt="Screenshot_2026-01-17_13_09_32" src="https://github.com/user-attachments/assets/fb85089d-08b3-424f-bd86-db4774fe1b51" />
 <img width="1366" height="702" alt="Screenshot_2026-01-17_13_08_56" src="https://github.com/user-attachments/assets/3ce07edd-9196-4105-9fa0-95458ff3368d" />
@@ -142,17 +142,17 @@ The following shares are not accessible anonymously: <br>
 - IPC$ - *NO ACCESS* <br>
 **workfiles and print$ are accessible without a valid user login** <br>
 
-### Step 3: Investigate each shared directory to find the file.###
+### Step 3: Investigate each shared directory to find the file.
 Use the SMB-native client to access the drive shares on the SMB server. Use the dir, ls, cd, and other commands to find subdirectories and files. <br>
 using the command **smbclient //10.5.5.14/print$ -N**. i tried **workfiles** but no files listed in it. <br>
 Anonymous login successful <br>
 dir <br>
 cd OTHER <br>
 ls <br>
-Locate the file with the Challenge 3 code. <br>
+- Locate the file with the Challenge 3 code. <br>
 <img width="1366" height="702" alt="Screenshot_2026-01-17_14_07_39" src="https://github.com/user-attachments/assets/ecb90145-3f84-49f4-9772-a29c908a7b8a" />
 
-Download the file and open it locally. <br>
+- Download the file and open it locally. <br>
 use **get sxij42.txt** to download the file to the local machine <br>
 <img width="1366" height="702" alt="Screenshot_2026-01-17_14_17_34" src="https://github.com/user-attachments/assets/f317601c-c7cb-49da-9bc3-a65655cd7295" />
 exit <br>
@@ -168,15 +168,31 @@ The file with challenge 3 code is **sxij42.txt** <br>
 - Enter the code for Challenge 3 below. <br>
 NWs39691 <br>
 
-### Step 4: Research and propose SMB attack remediation.###
+### Step 4: Research and propose SMB attack remediation.
 What are two remediation methods for preventing SMB servers from being accessed? <br>
 To prevent unauthorized access to SMB servers in 2026, use these two methods: <br>
 - Block Port 445: Use firewalls to block all inbound and outbound traffic on TCP port 445. This prevents attackers from reaching the SMB service from the internet or unauthorized internal segments. <br>
 - Disable Guest Logons: Configure Group Policy to disable "Insecure Guest Logons." This ensures that no user can access or even list available shares without providing valid, authenticated credentials. <br>
 
 # Challenge 4: Analyze a PCAP File to Find Information.
+*As part of your reconnaissance effort, your team captured traffic using Wireshark. The capture file, SA.pcap, is located in the Downloads subdirectory within the kali user home directory.*
+<img width="1366" height="702" alt="Screenshot_2026-01-17_15_12_58" src="https://github.com/user-attachments/assets/af2431d4-8d10-4175-bda8-8a3b997dc279" />
 
 
+### Step 1: Find and analyze the SA.pcap file.
+Analyze the content of the PCAP file to determine the IP address of the target computer and the URL location of the file with the Challenge 4 code.
+<img width="1366" height="702" alt="Screenshot_2026-01-17_15_31_51" src="https://github.com/user-attachments/assets/e9d0a7a2-6413-4eb6-ae50-761d1f34c852" />
+By looking at the "Source" and "Destination" columns, we can see two primary IP addresses interacting: **10.5.5.1 and 10.5.5.11**. <br>
+10.5.5.1 appears to be the client (the machine initiating requests). <br>
+10.5.5.11 is the target computer (server). In packet No.4, the client sends a GET request to 10.5.5.11. in packet No.6, 10.5.5.11 responds with an HTTTP 200 OK, confirming it is hosting the web services. <br>
+
+- What is the IP address of the target computer? <br>
+10.5.5.11 <br>
+- What directories on the target are revealed in the PCAP?
+http://10.5.5.11/database-offline.php, http://10.5.5.11/styles/global-styles.css, http://10.5.5.11/test/, http://10.5.5.11/data, http://10.5.5.11/webservices/rest/ws-user-account.php, http://10.5.5.11/includes, http://10.5.5.11/passwords, http://10.5.5.11/icons.text/gif, http://10.5.5.11/javascript/follow-mouse.js, http://10.5.5.11/webservices/soap/lib <br>
+
+### Step 2: Use a web browser to display the contents of the directories on the target computer.
+Use a web browser to investigate the URLs listed in the Wireshark output. Find the file with the code for Challenge 4. <br>
 
 
 
