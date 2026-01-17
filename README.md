@@ -64,7 +64,7 @@ The code for this challenge is 8748wf8J.** <br>
 <img width="1366" height="702" alt="Screenshot_2026-01-16_19_17_51" src="https://github.com/user-attachments/assets/41b1eab9-920f-4c49-870f-19c03cc41d41" />
 
 ### Step 5: Research and propose SQL attack remediation.
-What are five remediation methods for preventing SQL injection exploits?
+What are five remediation methods for preventing SQL injection exploits? <br>
 a. Enforce the Principle of Least Privilege 
 Limit the permissions of the database account used by the application. An application should only have access to the specific tables and operations (like SELECT or UPDATE) it needs for its function. It should never use a root or administrative account, which minimizes the damage an attacker can do even if they successfully bypass other defenses. <br>
 
@@ -85,7 +85,7 @@ Stored procedures are pre-compiled SQL code stored directly on the database serv
 *In this challenge, you will locate the flag file in a vulnerable directory on a web server.*
 
 ### Step 1: Preliminary setup ###
-If not already, log into the server at 10.5.5.12 with the admin / password credentials.
+If not already, log in to the server at 10.5.5.12 with the admin/password credentials.
 ### Step 2: From the results of your reconnaissance, determine which directories are viewable using a web browser and URL manipulation. ###
 Perform reconnaissance on the server to find directories where indexing was found.
 
