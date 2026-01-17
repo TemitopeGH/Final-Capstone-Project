@@ -198,6 +198,16 @@ Use a web browser to investigate the URLs listed in the Wireshark output. Find t
 - What is the URL of the file? <br>
 http://10.5.5.11/data <br>
 - What is the content of the file? <br>
+Employee ID, UserName, Password, signature, and Type <br>
+<img width="1366" height="702" alt="Screenshot_2026-01-17_23_10_10" src="https://github.com/user-attachments/assets/03472ba0-5a98-47b8-b571-a89c52cdf848" />
+- What is the code for Challenge 4? <br>
+21z-1478K <br>
+
+### Step 3: Research and propose remediation that would prevent file content from being transmitted in clear text.
+What are two remediation methods that can prevent unauthorized persons from viewing the content of the files? <br>
+- Encryption: This renders data unreadable to anyone without the decryption key. Encryption at rest protects stored files on disks or cloud servers, while encryption in transit (such as TLS 1.3) secures data as it moves across networks.
+- Access Control: This ensures only verified users can access files. It relies on the Principle of Least Privilege (PoLP) to limit access to only what is necessary for a user's role and utilizes Multi-Factor Authentication (MFA) to prevent unauthorized login even if a password is stolen.
+
 
 
 
