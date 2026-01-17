@@ -194,6 +194,10 @@ http://10.5.5.11/database-offline.php, http://10.5.5.11/styles/global-styles.css
 
 ### Step 2: Use a web browser to display the contents of the directories on the target computer.
 Use a web browser to investigate the URLs listed in the Wireshark output. Find the file with the code for Challenge 4. <br>
+<img width="1366" height="702" alt="Screenshot_2026-01-17_22_31_39" src="https://github.com/user-attachments/assets/11b1f42a-2210-4647-a2c5-587ea37f267d" />
+- What is the URL of the file? <br>
+http://10.5.5.11/data <br>
+- What is the content of the file? <br>
 
 
 
