@@ -87,6 +87,101 @@ Stored procedures are pre-compiled SQL code stored directly on the database serv
 ### Step 1: Preliminary setup ###
 If not already, log in to the server at 10.5.5.12 with the admin/password credentials.
 ### Step 2: From the results of your reconnaissance, determine which directories are viewable using a web browser and URL manipulation. ###
-Perform reconnaissance on the server to find directories where indexing was found.
+Perform reconnaissance on the server to find directories where indexing was found using **nikto -h 10.5.5.12** <br>
+<img width="1366" height="702" alt="nikto -h ip address" src="https://github.com/user-attachments/assets/fde0290d-e362-4062-aaed-67e3b0f95eee" />
+
+Which directories can be accessed through a web browser to list the files and subdirectories that they contain? <br>
+**+ /config/: Directory indexing found.** <br>
+**+ /docs/: Directory indexing found.** <br>
+### Step 3: View the files contained in each directory to find the file containing the flag. ###
+Create a URL in the web browser to access the viewable subdirectories. Find the file with the code for Challenge 2 located in one of the subdirectories. <br>
+We use 10.5.5.12/config <br>
+
+<img width="1366" height="702" alt="Screenshot_2026-01-17_11_45_58" src="https://github.com/user-attachments/assets/b6ee6c0d-3d43-4766-baf1-5715f1a8b15b" />
+In which two subdirectories can you look for the file? <br>
+**+ /config/: Directory indexing found.** <br>
+**+ /docs/: Directory indexing found.** <br>
+What is the filename with the Challenge 2 code? <br>
+the file with the code for challenge 2 is **db_form.html** <br>
+Which subdirectory held the file? <br>
+**Parent Directory** held the file <br>
+What is the message contained in the flag file? Enter the code that you find in the file. <br>
+<img width="1366" height="702" alt="great work challenge 2 code" src="https://github.com/user-attachments/assets/868508a6-e35f-4ba7-884e-c5d73aa7c764" />
+
+### Step 4: Research and propose directory listing exploit remediation. ###
+What are two remediation methods for preventing directory listing exploits? <br>
+- Disable Directory Indexing in Web Server Configuration: This is the most secure and direct method. By modifying the server configuration, you prevent the web server from automatically generating a file list when a default index file is missing. <br>
+Apache: Remove Indexes from the Options directive in your httpd.conf or .htaccess file (e.g., Options -Indexes). <br>
+Nginx: Ensure the autoindex directive is set to off within the server or location block. <br>
+IIS: Use the IIS Manager to navigate to Directory Browsing and select Disable. <br>
+- Add a Default Index File to Every Directory: As a fail-safe measure, place a default index file (e.g., index.html, index.php) in every folder within the web root. When a user accesses the directory, the web server will automatically serve this specific file instead of displaying the full directory contents. While effective as a "quick-fix," it is less robust than server-level configuration because new directories may inadvertently be created without such a file. <br>
+
+# Challenge 3: Exploit open SMB Server Shares
+*In this part, you want to discover if there are any unsecured shared directories located on an SMB server in the 10.5.5.0/24 network. You can use any of the tools you learned in earlier labs to find the drive shares available on the servers.* <br>
+
+### Step 1: Scan for potential targets running SMB. ###
+Use scanning tools to scan the 10.5.5.0/24 LAN for potential targets for SMB enumeration. <br>
+using nmap 10.5.5.0/24 to scan for live hosts **10.5.5.14** in the subnet with open ports 139 and 445 which are associated with SMB services. <br>
+
+<img width="1366" height="702" alt="Screenshot_2026-01-17_12_47_56" src="https://github.com/user-attachments/assets/29d46f48-2284-423b-9bf1-b9bb2281340c" />
+Which host on the 10.5.5.0/24 network has open ports indicating it is likely running SMB services? <br>
+**10.5.5.14** <br>
+### Step 2: Determine which SMB directories are shared and can be accessed by anonymous users. ###
+Use a tool to scan the device that is running SMB and locate the shares that can be accessed by anonymous users using **enum4linux -S 10.5.5.14** command. <br>
+<img width="1366" height="702" alt="Screenshot_2026-01-17_13_09_32" src="https://github.com/user-attachments/assets/fb85089d-08b3-424f-bd86-db4774fe1b51" />
+<img width="1366" height="702" alt="Screenshot_2026-01-17_13_08_56" src="https://github.com/user-attachments/assets/3ce07edd-9196-4105-9fa0-95458ff3368d" />
+
+What shares are listed on the SMB server? Which ones are accessible without a valid user login? <br>
+using the command **smbmap -H 10.5.5.14** to see listed SMB shares and which are accessible without a valid user login <br>
+<img width="1366" height="702" alt="Screenshot_2026-01-17_13_25_13" src="https://github.com/user-attachments/assets/35ff31cb-2acf-448e-92e0-13a9412ade71" />
+Based on the smbmap output, the shares that are accessible without a valid user login (anonymous access) are: <br>
+- workfiles - *READ ONLY* <br>
+- print$ - *READ ONLY* <br>
+The following shares are not accessible anonymously: <br>
+- homes - *NO ACCESS* <br>
+- IPC$ - *NO ACCESS* <br>
+**workfiles and print$ are accessible without a valid user login** <br>
+
+### Step 3: Investigate each shared directory to find the file. ###
+Use the SMB-native client to access the drive shares on the SMB server. Use the dir, ls, cd, and other commands to find subdirectories and files. <br>
+using the command **smbclient //10.5.5.14/print$ -N**. i tried **workfiles** but no files listed in it. <br>
+Anonymous login successful <br>
+dir <br>
+cd OTHER <br>
+ls <br>
+Locate the file with the Challenge 3 code. <br>
+<img width="1366" height="702" alt="Screenshot_2026-01-17_14_07_39" src="https://github.com/user-attachments/assets/ecb90145-3f84-49f4-9772-a29c908a7b8a" />
+
+Download the file and open it locally. <br>
+use **get sxij42.txt** to download the file to the local machine <br>
+<img width="1366" height="702" alt="Screenshot_2026-01-17_14_17_34" src="https://github.com/user-attachments/assets/f317601c-c7cb-49da-9bc3-a65655cd7295" />
+exit <br>
+ls <br>
+cat sxij42.txt <br>
+<img width="1366" height="702" alt="Screenshot_2026-01-17_14_22_46" src="https://github.com/user-attachments/assets/60bccad6-18f9-4cc6-9f2c-31fbe99a8510" />
+or open it with an editor **nano sxij42.txt** <br>
+<img width="1366" height="702" alt="Screenshot_2026-01-17_14_23_15" src="https://github.com/user-attachments/assets/61767528-edee-4111-ba5b-6ecd86081319" />
+In which share is the file found? <br>
+the file is found in print$ <br>
+What is the name of the file with Challenge 3 code? <br>
+The file with challenge 3 code is **sxij42.txt** <br>
+Enter the code for Challenge 3 below. <br>
+NWs39691 <br>
+
+### Step 4: Research and propose SMB attack remediation. ###
+What are two remediation methods for preventing SMB servers from being accessed? <br>
+To prevent unauthorized access to SMB servers in 2026, use these two methods: <br>
+- Block Port 445: Use firewalls to block all inbound and outbound traffic on TCP port 445. This prevents attackers from reaching the SMB service from the internet or unauthorized internal segments. <br>
+- Disable Guest Logons: Configure Group Policy to disable "Insecure Guest Logons." This ensures that no user can access or even list available shares without providing valid, authenticated credentials. <br>
+
+# Challenge 4: Analyze a PCAP File to Find Information.
+
+
+
+
+
+
+
+
 
 
