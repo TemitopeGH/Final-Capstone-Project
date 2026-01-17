@@ -125,9 +125,9 @@ using nmap 10.5.5.0/24 to scan for live hosts **10.5.5.14** in the subnet with o
 
 <img width="1366" height="702" alt="Screenshot_2026-01-17_12_47_56" src="https://github.com/user-attachments/assets/29d46f48-2284-423b-9bf1-b9bb2281340c" />
 Which host on the 10.5.5.0/24 network has open ports indicating it is likely running SMB services? <br>
-Host **10.5.5.14** <br>
-### Step 2: Determine which SMB directories are shared and can be accessed by anonymous users. ###
-Use a tool to scan the device that is running SMB and locate the shares that can be accessed by anonymous users using **enum4linux -S 10.5.5.14** command. <br>
+Host 10.5.5.14 <br>
+### Step 2: Determine which SMB directories are shared and can be accessed by anonymous users.###
+Use a tool to scan the device running SMB and locate the shares that can be accessed by anonymous users using the **enum4linux -S 10.5.5.14** command. <br>
 <img width="1366" height="702" alt="Screenshot_2026-01-17_13_09_32" src="https://github.com/user-attachments/assets/fb85089d-08b3-424f-bd86-db4774fe1b51" />
 <img width="1366" height="702" alt="Screenshot_2026-01-17_13_08_56" src="https://github.com/user-attachments/assets/3ce07edd-9196-4105-9fa0-95458ff3368d" />
 
@@ -142,7 +142,7 @@ The following shares are not accessible anonymously: <br>
 - IPC$ - *NO ACCESS* <br>
 **workfiles and print$ are accessible without a valid user login** <br>
 
-### Step 3: Investigate each shared directory to find the file. ###
+### Step 3: Investigate each shared directory to find the file.###
 Use the SMB-native client to access the drive shares on the SMB server. Use the dir, ls, cd, and other commands to find subdirectories and files. <br>
 using the command **smbclient //10.5.5.14/print$ -N**. i tried **workfiles** but no files listed in it. <br>
 Anonymous login successful <br>
@@ -161,14 +161,14 @@ cat sxij42.txt <br>
 <img width="1366" height="702" alt="Screenshot_2026-01-17_14_22_46" src="https://github.com/user-attachments/assets/60bccad6-18f9-4cc6-9f2c-31fbe99a8510" />
 or open it with an editor **nano sxij42.txt** <br>
 <img width="1366" height="702" alt="Screenshot_2026-01-17_14_23_15" src="https://github.com/user-attachments/assets/61767528-edee-4111-ba5b-6ecd86081319" />
-In which share is the file found? <br>
+- In which share is the file found? <br>
 the file is found in print$ <br>
-What is the name of the file with Challenge 3 code? <br>
+- What is the name of the file with Challenge 3 code? <br>
 The file with challenge 3 code is **sxij42.txt** <br>
-Enter the code for Challenge 3 below. <br>
+- Enter the code for Challenge 3 below. <br>
 NWs39691 <br>
 
-### Step 4: Research and propose SMB attack remediation. ###
+### Step 4: Research and propose SMB attack remediation.###
 What are two remediation methods for preventing SMB servers from being accessed? <br>
 To prevent unauthorized access to SMB servers in 2026, use these two methods: <br>
 - Block Port 445: Use firewalls to block all inbound and outbound traffic on TCP port 445. This prevents attackers from reaching the SMB service from the internet or unauthorized internal segments. <br>
