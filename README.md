@@ -125,7 +125,7 @@ using nmap 10.5.5.0/24 to scan for live hosts **10.5.5.14** in the subnet with o
 
 <img width="1366" height="702" alt="Screenshot_2026-01-17_12_47_56" src="https://github.com/user-attachments/assets/29d46f48-2284-423b-9bf1-b9bb2281340c" />
 Which host on the 10.5.5.0/24 network has open ports indicating it is likely running SMB services? <br>
-**10.5.5.14** <br>
+Host **10.5.5.14** <br>
 ### Step 2: Determine which SMB directories are shared and can be accessed by anonymous users. ###
 Use a tool to scan the device that is running SMB and locate the shares that can be accessed by anonymous users using **enum4linux -S 10.5.5.14** command. <br>
 <img width="1366" height="702" alt="Screenshot_2026-01-17_13_09_32" src="https://github.com/user-attachments/assets/fb85089d-08b3-424f-bd86-db4774fe1b51" />
