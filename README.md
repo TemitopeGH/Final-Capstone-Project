@@ -1,5 +1,5 @@
 # Final-Capstone-Project
-Final Capstone Activity from Challenge 1 - 4 using Kali VM, Internet access, crackstation
+Final Capstone Activity from Challenge 1 - 4 using Kali VM, Internet access, crackstation, Wireshark, NMAP, 
 # Challenge 1: SQL Injection #
 *In this part, you must discover user account information on a server and crack the password of Bob Smith's account. You will then locate the file that contains the Challenge 1 code and use Bob Smith's account credentials to open the file at 192.168.0.10 to view its contents.*
 
